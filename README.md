@@ -43,12 +43,12 @@ A background job runs every 5 minutes using BullMQ and Redis. It does the follow
 
 ```
 src/
+  config/db.js
   controllers/
   models/
   routes/
   jobs/
   services/
-  db.js
 .env.example
 ```
 
