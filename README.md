@@ -13,6 +13,23 @@ A backend system to allow users to subscribe to out-of-stock products and receiv
 - Background job every 5 minutes
 - Logs each email notification
 
+## 🕒 Scheduler and Queue Logic
+
+A background job runs every 5 minutes using BullMQ and Redis. It does the following:
+
+- Scans all products with available stock.
+- For each product, fetches subscriptions that haven't been notified.
+- Sends an email to each user using Nodemailer (via Ethereal).
+- Marks those subscriptions as notified and logs the notification.
+
+## 📬 How to Test Email Notifications Using Ethereal
+
+1. Go to [https://ethereal.email/](https://ethereal.email/) and create a test account.
+2. Copy your Ethereal credentials (email & password) into your `.env` file.
+3. Trigger stock update via API (`PUT /api/products/:id/stock`) to a value > 0.
+4. After 5 minutes, emails will be sent and logged to console.
+5. Use the Ethereal inbox link provided in logs to view the email.
+
 ## 🧱 API Overview
 
 - `POST /api/users` – Create a user
